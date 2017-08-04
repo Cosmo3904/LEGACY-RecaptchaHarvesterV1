@@ -15,7 +15,7 @@ tokens = {'tokens':[]}
 
 app = Flask(__name__)
 
-def tokenremoval(token, useless):
+def tokenremoval(token):
     tokens['tokens'].append(token)
     time.sleep(110)
     tokens['tokens'].remove(token)
@@ -29,7 +29,7 @@ def json():
 def solve():
     if request.method == "POST":
             token = request.form.get('g-recaptcha-response', '')
-            Thread(target = tokenremoval, args = (token, 'shit')).start()
+            Thread(target = tokenremoval, args = [token]).start()
     return(render_template('index.html', sitekey = sitekey))
 
 if __name__ == '__main__':
